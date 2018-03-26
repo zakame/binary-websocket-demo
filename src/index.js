@@ -1,11 +1,11 @@
 require('./style.css');
 
-require(['binary-live-api', 'knockout'], function(binary, ko) {
+require(['binary-live-api', 'knockout'], function (binary, ko) {
   'use strict';
 
   var appId = 12038;
 
-  Date.fromEpoch = function(seconds) {
+  Date.fromEpoch = function (seconds) {
     var date = new Date(0);
     date.setUTCSeconds(seconds);
     return date;
@@ -16,7 +16,7 @@ require(['binary-live-api', 'knockout'], function(binary, ko) {
   ko.bindingHandlers.d3LineGraph = require(['knockout-d3-line-graph']);
 
   ko.bindingHandlers.localDateTime = {
-    update: function(element, valueAccessor) {
+    update: function (element, valueAccessor) {
       var date = Date.fromEpoch(ko.unwrap(valueAccessor()));
       element.innerHTML =
         date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
@@ -37,19 +37,19 @@ require(['binary-live-api', 'knockout'], function(binary, ko) {
 
     self.ticks = ko.observableArray([]);
     self.maxTicks = ko.observable(300);
-    self.chosenTabTicks = ko.computed(function() {
+    self.chosenTabTicks = ko.computed(function () {
       return self.ticks().slice(0 - self.maxTicks());
     });
 
     self.unsubscribeTimeElapsed = ko.observable();
     self.subscribeTimeElapsed = ko.observable();
 
-    self.goToTab = function(tab) {
+    self.goToTab = function (tab) {
       if (self.chosenTabId() === tab)
         return;
 
       var unsubscribeStartTime = Date.now();
-      api.unsubscribeFromAllTicks().then(function() {
+      api.unsubscribeFromAllTicks().then(function () {
         self.chosenTabData(false);
         self.chosenTabError(false);
         self.ticks([]);
@@ -65,15 +65,15 @@ require(['binary-live-api', 'knockout'], function(binary, ko) {
         api.getTickHistory(tab, {
           end: 'latest',
           subscribe: 1
-        }).then(function() {
+        }).then(function () {
           self.subscribeTimeElapsed(Date.now() - subscribeStartTime);
-        }).catch(function(error) {
+        }).catch(function (error) {
           self.chosenTabError(error.error.error.message);
         })
       })
     };
 
-    api.events.on('history', function(data) {
+    api.events.on('history', function (data) {
       var history = [];
       for (var i = 0; i < data.history.prices.length; i++) {
         history.push({
@@ -83,7 +83,7 @@ require(['binary-live-api', 'knockout'], function(binary, ko) {
       }
       self.ticks(history);
     });
-    api.events.on('tick', function(data) {
+    api.events.on('tick', function (data) {
       self.chosenTabData(data.tick);
       self.ticks.push({
         position: Date.fromEpoch(data.tick.epoch),
