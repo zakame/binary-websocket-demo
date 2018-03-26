@@ -77,14 +77,6 @@ body {
   padding: 0.4em 0 0.3em 0.7em;
 }
 
-/* .tick th:nth-child(1), .tick td:nth-child(1) { width: 20%; } */
-
-/* .tick th:nth-child(2), .tick td:nth-child(2) { width: 15%; } */
-
-/* .tick th:nth-child(3), .tick td:nth-child(3) { width: 45%; } */
-
-/* .tick th:nth-child(4), .tick td:nth-child(4) { width: 15%; } */
-
 .tick th:last-child {
   border-right: none
 }
@@ -105,7 +97,6 @@ body {
 }
 
 .path {
-  /* stroke: rgba(255,255,255,0.25); */
   stroke: #00f;
   stroke-linejoin: round;
   stroke-width: 1.5;
