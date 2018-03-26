@@ -1,0 +1,138 @@
+body {
+  font-family: Helvetica, Arial;
+}
+
+.tabs {
+  background-color: #bbb;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 7px;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #d6d6d6), color-stop(0.4, #c0c0c0), color-stop(1, #a4a4a4));
+  margin: 10px 0 16px 0;
+  font-size: 0px;
+}
+
+.tabs li:hover {
+  background-color: #ddd;
+}
+
+.tabs li:first-child {
+  border-left: none;
+  border-radius: 7px 0 0 7px;
+}
+
+.tabs li {
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0.5em 1.5em;
+  cursor: pointer;
+  color: #444;
+  text-shadow: #f7f7f7 0 1px 1px;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #888;
+}
+
+.tabs li {
+  *display: inline !important;
+}
+
+/* IE7 only */
+
+.tabs .selected {
+  background-color: #444 !important;
+  color: white;
+  text-shadow: none;
+  border-right-color: #aaa;
+  border-left: none;
+  box-shadow: inset 1px 2px 6px #070707;
+}
+
+.tick {
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0;
+}
+
+.tick thead {
+  background-color: #bbb;
+  font-weight: bold;
+  color: #444;
+  text-shadow: #f7f7f7 0 1px 1px;
+}
+
+.tick tbody tr:hover {
+  cursor: pointer;
+  background-color: #68c !important;
+  color: White;
+}
+
+.tick th,
+.tick td {
+  text-align: left;
+  padding: 0.4em 0.3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tick th {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #888;
+  padding: 0.4em 0 0.3em 0.7em;
+}
+
+/* .tick th:nth-child(1), .tick td:nth-child(1) { width: 20%; } */
+
+/* .tick th:nth-child(2), .tick td:nth-child(2) { width: 15%; } */
+
+/* .tick th:nth-child(3), .tick td:nth-child(3) { width: 45%; } */
+
+/* .tick th:nth-child(4), .tick td:nth-child(4) { width: 15%; } */
+
+.tick th:last-child {
+  border-right: none
+}
+
+.tick tr:nth-child(even) {
+  background-color: #EEE;
+}
+
+.graph {
+  margin: auto;
+  width: 80%;
+  height: 300px;
+}
+
+.graph svg .plot .bg {
+  background: #fff;
+  fill: #fff !important;
+}
+
+.path {
+  /* stroke: rgba(255,255,255,0.25); */
+  stroke: #00f;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.area {
+  fill: rgba(255, 255, 255, 0.10);
+  stroke-width: 0;
+}
+
+.axis {
+  font-size: 12px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+}
+
+.error {
+  color: #F00;
+}

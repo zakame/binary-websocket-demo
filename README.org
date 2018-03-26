@@ -1,0 +1,14 @@
+#+TITLE: Binary.com WebSocket API demo
+
+* About
+
+This is a simple demo of using the [[https://developers.binary.com][Binary.com WebSocket API]] for
+retrieving and visualizing market data.
+
+* Quick Start
+
+Install and run webpack-dev-server on http://localhost:8080:
+
+#+BEGIN_SRC sh
+yarn && yarn run start
+#+END_SRC
