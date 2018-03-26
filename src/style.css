@@ -34,12 +34,6 @@ body {
   border-right: 1px solid #888;
 }
 
-.tabs li {
-  *display: inline !important;
-}
-
-/* IE7 only */
-
 .tabs .selected {
   background-color: #444 !important;
   color: white;
