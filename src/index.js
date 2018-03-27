@@ -1,5 +1,7 @@
 require('./style.css');
 
+require(['knockout-d3-line-graph', './util/knockout-spinner']);
+
 require(['binary-live-api', 'knockout'], function (binary, ko) {
   'use strict';
 
@@ -12,8 +14,6 @@ require(['binary-live-api', 'knockout'], function (binary, ko) {
   };
 
   ko.options.deferUpdates = true;
-
-  ko.bindingHandlers.d3LineGraph = require(['knockout-d3-line-graph']);
 
   ko.bindingHandlers.localDateTime = {
     update: function (element, valueAccessor) {
@@ -41,6 +41,8 @@ require(['binary-live-api', 'knockout'], function (binary, ko) {
       return self.ticks().slice(0 - self.maxTicks());
     });
 
+    self.isLoading = ko.observable(true);
+
     self.unsubscribeTimeElapsed = ko.observable();
     self.subscribeTimeElapsed = ko.observable();
 
@@ -53,6 +55,7 @@ require(['binary-live-api', 'knockout'], function (binary, ko) {
         self.chosenTabData(false);
         self.chosenTabError(false);
         self.ticks([]);
+        self.isLoading(true);
 
         self.unsubscribeTimeElapsed(Date.now() - unsubscribeStartTime);
         var subscribeStartTime = Date.now();
@@ -69,8 +72,10 @@ require(['binary-live-api', 'knockout'], function (binary, ko) {
           self.subscribeTimeElapsed(Date.now() - subscribeStartTime);
         }).catch(function (error) {
           self.chosenTabError(error.error.error.message);
-        })
-      })
+        }).finally(function () {
+          self.isLoading(false);
+        });
+      });
     };
 
     api.events.on('history', function (data) {

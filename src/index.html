@@ -10,6 +10,16 @@
                      css: { selected: $data === $root.chosenTabId() },
                      click: $root.goToTab"></li>
     </ul>
+    <span data-bind="spinner: $root.isLoading,
+                     spinnerOptions: {
+                     lines: 13,
+                     length: 38,
+                     width: 17,
+                     radius: 45,
+                     scale: 1,
+                     corners: 1
+                     }">
+    </span>
     <div data-bind="with: $root.chosenTabData">
       <p>
         Latest data for <span data-bind="text: $root.chosenTabId"></span>
