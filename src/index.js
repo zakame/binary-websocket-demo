@@ -72,7 +72,7 @@ require(['binary-live-api', 'knockout'], function (binary, ko) {
           self.subscribeTimeElapsed(Date.now() - subscribeStartTime);
         }).catch(function (error) {
           self.chosenTabError(error.error.error.message);
-        }).finally(function () {
+        }).then(function () {
           self.isLoading(false);
         });
       });
