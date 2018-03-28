@@ -50,31 +50,33 @@ require(['binary-live-api', 'knockout'], function (binary, ko) {
       if (self.chosenTabId() === tab)
         return;
 
+      self.chosenTabError(false);
+      self.isLoading(true);
+
+      var subscribeStartTime;
       var unsubscribeStartTime = Date.now();
       api.unsubscribeFromAllTicks().then(function () {
         self.chosenTabData(false);
-        self.chosenTabError(false);
         self.ticks([]);
-        self.isLoading(true);
 
         self.unsubscribeTimeElapsed(Date.now() - unsubscribeStartTime);
-        var subscribeStartTime = Date.now();
+        subscribeStartTime = Date.now();
         self.chosenTabId(tab);
 
-        if (!tab.match(/^R/)) {
+        if (!tab.match(/^R/))
           tab = 'frx' + tab;
-        }
-
-        api.getTickHistory(tab, {
+      }).then(function () {
+        return api.getTickHistory(tab, {
           end: 'latest',
           subscribe: 1
-        }).then(function () {
-          self.subscribeTimeElapsed(Date.now() - subscribeStartTime);
-        }).catch(function (error) {
-          self.chosenTabError(error.error.error.message);
-        }).then(function () {
-          self.isLoading(false);
         });
+      }).catch(function (error) {
+        var message = error.error ?
+          error.error.error.message : error.message;
+        self.chosenTabError(message);
+        self.isLoading(false);
+      }).then(function () {
+        self.subscribeTimeElapsed(Date.now() - subscribeStartTime);
       });
     };
 
@@ -94,6 +96,7 @@ require(['binary-live-api', 'knockout'], function (binary, ko) {
         position: Date.fromEpoch(data.tick.epoch),
         value: data.tick.quote
       });
+      self.isLoading(false);
     });
 
     self.goToTab(self.tabs[self.tabs.length - 1]);
