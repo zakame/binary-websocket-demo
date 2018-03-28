@@ -4,6 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "deploy": "gh-pages -d dist",
     "start": "webpack-dev-server",
     "build": "webpack -p"
   },
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "binary-live-api": "^29.0.0",
+    "gh-pages": "^1.1.0",
     "knockout-d3-line-graph": "^1.2.1",
     "spin.js": "^3.1.0"
   }
