@@ -70,7 +70,7 @@ require(['binary-live-api', 'knockout'], function (binary, ko) {
 
         if (!tab.match(/^R/))
           tab = 'frx' + tab;
-      }).then(function () {
+
         return api.getTickHistory(tab, {
           end: 'latest',
           subscribe: 1
