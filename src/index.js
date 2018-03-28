@@ -1,8 +1,12 @@
 require('./style.css');
 
-require(['knockout-d3-line-graph', './util/knockout-spinner']);
+var binary = require('binary-live-api');
 
-require(['binary-live-api', 'knockout'], function (binary, ko) {
+require([
+  'knockout',
+  'knockout-d3-line-graph',
+  './util/knockout-spinner'
+], function (ko) {
   'use strict';
 
   var appId = 12038;
