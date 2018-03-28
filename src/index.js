@@ -50,12 +50,17 @@ require(['binary-live-api', 'knockout'], function (binary, ko) {
       if (self.chosenTabId() === tab)
         return;
 
-      self.chosenTabError(false);
-      self.isLoading(true);
-
       var subscribeStartTime;
-      var unsubscribeStartTime = Date.now();
-      api.unsubscribeFromAllTicks().then(function () {
+      var unsubscribeStartTime;
+
+      var promise = Promise.resolve();
+      promise.then(function () {
+        self.chosenTabError(false);
+        self.isLoading(true);
+      }).then(function () {
+        unsubscribeStartTime = Date.now();
+        return api.unsubscribeFromAllTicks();
+      }).then(function () {
         self.chosenTabData(false);
         self.ticks([]);
 
