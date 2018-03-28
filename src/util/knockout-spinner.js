@@ -1,15 +1,16 @@
-define(['knockout', 'lodash/extend', 'spin.js'], function (ko, extend, spin) {
+define(['knockout', 'spin.js'], function (ko, spin) {
   'use strict';
 
   var Spinner = spin.Spinner;
 
   ko.bindingHandlers.spinner = {
     init: function (element, valueAccessor, allBindings) {
-      element.spinner = new Promise(function (resolve, reject) {
+      element.spinner = new Promise(function (resolve) {
         setTimeout(function () {
           var options = {};
-          options.color = getComputedStyle(element).color;
-          extend(options, ko.bindingHandlers.spinner.defaultOptions,
+          var win = element.ownerDocument.defaultView;
+          options.color = win.getComputedStyle(element, null).color;
+          Object.assign(options, ko.bindingHandlers.spinner.defaultOptions,
             ko.unwrap(allBindings.get('spinnerOptions')));
 
           resolve(new Spinner(options));
