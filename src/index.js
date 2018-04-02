@@ -13,6 +13,8 @@ require([
 
   var appId = 12038;
 
+  ko.components.register('tabs', require('./ko-components/tabs'));
+
   ko.options.deferUpdates = true;
 
   function ViewModel() {

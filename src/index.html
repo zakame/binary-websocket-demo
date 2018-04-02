@@ -5,11 +5,7 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <ul class="tabs" data-bind="foreach: tabs">
-      <li data-bind="text: $data,
-                     css: { selected: $data === $root.chosenTabId() },
-                     click: $root.goToTab"></li>
-    </ul>
+    <tabs params="value: tabs, selected: chosenTabId, click: goToTab"></tabs>
     <span data-bind="spinner: $root.isLoading,
                      spinnerOptions: {
                      lines: 13,
