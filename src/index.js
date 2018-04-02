@@ -6,6 +6,7 @@ require([
   'knockout',
   'knockout-d3-line-graph',
   './util/date-fromEpoch',
+  './util/knockout-localDateTime',
   './util/knockout-spinner'
 ], function (ko) {
   'use strict';
@@ -13,14 +14,6 @@ require([
   var appId = 12038;
 
   ko.options.deferUpdates = true;
-
-  ko.bindingHandlers.localDateTime = {
-    update: function (element, valueAccessor) {
-      var date = Date.fromEpoch(ko.unwrap(valueAccessor()));
-      element.innerHTML =
-        date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-    }
-  };
 
   function ViewModel() {
     var self = this;
