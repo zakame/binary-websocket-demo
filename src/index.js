@@ -49,6 +49,7 @@ require([
 
     self.unsubscribeTimeElapsed = ko.observable();
     self.subscribeTimeElapsed = ko.observable();
+    self.subscriptionId = ko.observable();
 
     self.goToTab = function (tab) {
       if (self.chosenTabId() === tab)
@@ -105,6 +106,7 @@ require([
         position: Date.fromEpoch(data.tick.epoch),
         value: data.tick.quote
       });
+      self.subscriptionId(data.tick.id);
       self.isLoading(false);
     });
 
