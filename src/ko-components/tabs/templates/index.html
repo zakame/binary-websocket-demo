@@ -1,0 +1,5 @@
+<ul class="tabs" data-bind="foreach: value">
+  <li data-bind="text: $data,
+                 css: { selected: $data === $parent.selected() },
+                 click: $parent.click"></li>
+</ul>
