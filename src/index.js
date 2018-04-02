@@ -5,17 +5,12 @@ var binary = require('binary-live-api');
 require([
   'knockout',
   'knockout-d3-line-graph',
+  './util/date-fromEpoch',
   './util/knockout-spinner'
 ], function (ko) {
   'use strict';
 
   var appId = 12038;
-
-  Date.fromEpoch = function (seconds) {
-    var date = new Date(0);
-    date.setUTCSeconds(seconds);
-    return date;
-  };
 
   ko.options.deferUpdates = true;
 
