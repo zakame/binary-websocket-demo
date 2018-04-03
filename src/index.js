@@ -4,9 +4,7 @@ var binary = require('binary-live-api');
 
 require([
   'knockout',
-  'knockout-d3-line-graph',
   './util/date-fromEpoch',
-  './util/knockout-localDateTime',
   './util/knockout-spinner'
 ], function (ko) {
   'use strict';
@@ -14,6 +12,7 @@ require([
   var appId = 12038;
 
   ko.components.register('tabs', require('./ko-components/tabs'));
+  ko.components.register('graph', require('./ko-components/graph'));
 
   ko.options.deferUpdates = true;
 
