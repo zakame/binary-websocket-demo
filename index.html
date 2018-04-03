@@ -6,11 +6,11 @@
                      radius: 45,
                      scale: 1,
                      corners: 1
-                     }"> </span> <div data-bind="with: $root.chosenTabData"> <p> Latest data for <span data-bind="text: $root.chosenTabId"></span> at <span data-bind="localDateTime: epoch"></span>: </p> <table class=tick> <thead> <tr> <th>Ask</th> <th>Bid</th> <th>Quote</th> </tr> </thead> <tbody> <tr> <td><span data-bind="text: ask"></span></td> <td><span data-bind="text: bid"></span></td> <td><span data-bind="text: quote"></span></td> </tr> </tbody> </table> <div class=graph data-bind="d3LineGraph: {
-                  showAxes: true,
-                  value: $root.chosenTabTicks,
-                  xScale: d3.time.scale,
-                  x: function (d, i) { return d.position; },
-                  y: function (d) { return d.value; }
-                  }"> </div> <p> Subscription ID: <span data-bind="text: $root.subscriptionId"></span> </p> <p> Unsubscribed previous tick at <span data-bind="text: $root.unsubscribeTimeElapsed"></span>ms </p> <p> Subscribed to new tick at <span data-bind="text: $root.subscribeTimeElapsed"></span>ms </p> </div> <div data-bind="visible: $root.chosenTabData"> <p> Maximum ticks in graph: <select data-bind="options: [50, 150, 300, 500, 1000, 2500, 5000],
+                     }"> </span> <graph params="data: chosenTabData,
+                  id: chosenTabId,
+                  ticks: chosenTabTicks,
+                  subscriptionId: subscriptionId,
+                  unsubscribeTimeElapsed: unsubscribeTimeElapsed,
+                  subscribeTimeElapsed: subscribeTimeElapsed
+                  "> </graph> <div data-bind="visible: $root.chosenTabData"> <p> Maximum ticks in graph: <select data-bind="options: [50, 150, 300, 500, 1000, 2500, 5000],
                            value: $root.maxTicks"> </select> </p> </div> <div data-bind="with: $root.chosenTabError"> <p class=error><span data-bind="text: $data"></span></p> </div> <script type="text/javascript" src="bundle.js"></script></body> </html> 
