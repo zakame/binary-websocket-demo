@@ -19,7 +19,7 @@ module.exports = {
         })
       },
       {
-        test: /\.html$/,
+        test: /templates\/.+\.html$/,
         use: [
           'html-loader'
         ]
