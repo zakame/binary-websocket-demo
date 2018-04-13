@@ -16,13 +16,31 @@
                      corners: 1
                      }">
     </span>
+    <div data-bind="visible: $root.chosenTabData">
+      <p>
+        Stake:
+        <select data-bind="options: [50, 100, 250, 500, 1000],
+                           value: $root.stake,
+                           event: { change: updatePrice }">
+        </select>
+        <span data-bind="spinner: $root.priceUpdating,
+                         spinnerOptions: {
+                         position: 'relative'
+                         }">
+        </span>
+        <span data-bind="visible: !$root.priceUpdating()">
+          Call: <span data-bind="text: callPayout"></span>
+          Put: <span data-bind="text: putPayout"></span>
+        </span>
+      </p>
+    </div>
     <graph params="data: chosenTabData,
-                  id: chosenTabId,
-                  ticks: chosenTabTicks,
-                  subscriptionId: subscriptionId,
-                  unsubscribeTimeElapsed: unsubscribeTimeElapsed,
-                  subscribeTimeElapsed: subscribeTimeElapsed
-                  ">
+                   id: chosenTabId,
+                   ticks: chosenTabTicks,
+                   subscriptionId: subscriptionId,
+                   unsubscribeTimeElapsed: unsubscribeTimeElapsed,
+                   subscribeTimeElapsed: subscribeTimeElapsed
+                   ">
     </graph>
     <div data-bind="visible: $root.chosenTabData">
       <p>
