@@ -48,6 +48,29 @@ require([
     self.subscribeTimeElapsed = ko.observable();
     self.subscriptionId = ko.observable();
 
+    self.getPrices = function (tab) {
+      return Promise.all([
+        pricerApi.subscribeToPriceForContractProposal({
+          amount: self.stake(),
+          basis: 'stake',
+          contract_type: 'CALL',
+          currency: 'USD',
+          duration: 3,
+          duration_unit: 'm',
+          symbol: tab
+        }),
+        pricerApi.subscribeToPriceForContractProposal({
+          amount: self.stake(),
+          basis: 'stake',
+          contract_type: 'PUT',
+          currency: 'USD',
+          duration: 3,
+          duration_unit: 'm',
+          symbol: tab
+        })
+      ]);
+    };
+
     self.goToTab = function (tab) {
       if (self.chosenTabId() === tab)
         return;
@@ -81,24 +104,7 @@ require([
             end: 'latest',
             subscribe: 1
           }),
-          pricerApi.subscribeToPriceForContractProposal({
-            amount: self.stake(),
-            basis: 'stake',
-            contract_type: 'CALL',
-            currency: 'USD',
-            duration: 3,
-            duration_unit: 'm',
-            symbol: tab
-          }),
-          pricerApi.subscribeToPriceForContractProposal({
-            amount: self.stake(),
-            basis: 'stake',
-            contract_type: 'PUT',
-            currency: 'USD',
-            duration: 3,
-            duration_unit: 'm',
-            symbol: tab
-          })
+          self.getPrices(tab)
         ]);
       }).catch(function (error) {
         var message = error.error ?
@@ -120,26 +126,7 @@ require([
         self.priceUpdating(true);
         return pricerApi.unsubscribeFromAllProposals();
       }).then(function () {
-        return Promise.all([
-          pricerApi.subscribeToPriceForContractProposal({
-            amount: self.stake(),
-            basis: 'stake',
-            contract_type: 'CALL',
-            currency: 'USD',
-            duration: 3,
-            duration_unit: 'm',
-            symbol: tab
-          }),
-          pricerApi.subscribeToPriceForContractProposal({
-            amount: self.stake(),
-            basis: 'stake',
-            contract_type: 'PUT',
-            currency: 'USD',
-            duration: 3,
-            duration_unit: 'm',
-            symbol: tab
-          })
-        ]);
+        return self.getPrices(tab);
       }).catch(function (error) {
         var message = error.error ?
           error.error.error.message : error.message;
