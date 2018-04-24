@@ -1,4 +1,12 @@
-<!DOCTYPE html> <html lang=en> <head> <meta charset=UTF-8 /> <title><%= htmlWebpackPlugin.options.title %></title> <link href="style.css" rel="stylesheet"></head> <body> <tabs params="value: tabs, selected: chosenTabId, click: goToTab"></tabs> <span data-bind="spinner: $root.isLoading,
+<!doctype html> <!-- -*- mode: web -*- -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Binary.com WebSocket API demo</title>
+  <link href="style.css" rel="stylesheet"></head>
+  <body>
+    <tabs params="value: tabs, selected: chosenTabId, click: goToTab"></tabs>
+    <span data-bind="spinner: $root.isLoading,
                      spinnerOptions: {
                      lines: 13,
                      length: 38,
@@ -6,11 +14,26 @@
                      radius: 45,
                      scale: 1,
                      corners: 1
-                     }"> </span> <graph params="data: chosenTabData,
+                     }">
+    </span>
+    <graph params="data: chosenTabData,
                   id: chosenTabId,
                   ticks: chosenTabTicks,
                   subscriptionId: subscriptionId,
                   unsubscribeTimeElapsed: unsubscribeTimeElapsed,
                   subscribeTimeElapsed: subscribeTimeElapsed
-                  "> </graph> <div data-bind="visible: $root.chosenTabData"> <p> Maximum ticks in graph: <select data-bind="options: [50, 150, 300, 500, 1000, 2500, 5000],
-                           value: $root.maxTicks"> </select> </p> </div> <div data-bind="with: $root.chosenTabError"> <p class=error><span data-bind="text: $data"></span></p> </div> <script type="text/javascript" src="bundle.js"></script></body> </html> 
+                  ">
+    </graph>
+    <div data-bind="visible: $root.chosenTabData">
+      <p>
+        Maximum ticks in graph:
+        <select data-bind="options: [50, 150, 300, 500, 1000, 2500, 5000],
+                           value: $root.maxTicks">
+        </select>
+      </p>
+    </div>
+    <div data-bind="with: $root.chosenTabError">
+      <p class="error"><span data-bind="text: $data"></span></p>
+    </div>
+  <script type="text/javascript" src="index.bundle.js"></script></body>
+</html>
