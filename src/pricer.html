@@ -1,0 +1,45 @@
+<!doctype html> <!-- -*- mode: web -*- -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <tabs params="value: tabs, selected: chosenTabId, click: goToTab"></tabs>
+    <span data-bind="spinner: $root.isLoading,
+                     spinnerOptions: {
+                     lines: 13,
+                     length: 38,
+                     width: 17,
+                     radius: 45,
+                     scale: 1,
+                     corners: 1
+                     }">
+    </span>
+    <div data-bind="visible: !$root.isLoading()">
+      <p>
+        Latest data at <span data-bind="localDateTime: spotTime"></span>:
+      </p>
+      <p>
+        Stake: USD
+        <select data-bind="options: [50, 100, 250, 500, 1000],
+                           value: stake,
+                           event: { change: makeProposals }">
+        </select>
+        Call: <strong>USD <span data-bind="text: callPayout"></span></strong>
+        Put: <strong>USD <span data-bind="text: putPayout"></span></strong>
+      </p>
+      <p>
+        Unsubscribed previous price proposals at
+        <span data-bind="text: unsubscribeTimeElapsed"></span>ms
+      </p>
+      <p>
+        Subscribed to new price proposals at
+        <span data-bind="text: subscribeTimeElapsed"></span>ms
+      </p>
+    </div>
+    <div data-bind="with: $root.chosenTabError">
+      <p class="error"><span data-bind="text: $data"></span></p>
+    </div>
+  </body>
+</html>

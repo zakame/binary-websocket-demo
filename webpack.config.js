@@ -7,7 +7,10 @@ module.exports = {
   devServer: {
     contentBase: './dist'
   },
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    pricer: './src/pricer.js'
+  },
   mode: 'development',
   module: {
     rules: [
@@ -27,15 +30,22 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
+      chunks: ['index'],
       template: './src/index.html',
       title: 'Binary.com WebSocket API demo'
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['pricer'],
+      filename: 'pricer.html',
+      template: './src/pricer.html',
+      title: 'Binary.com WebSocket API Pricer demo'
     })
   ]
 };
