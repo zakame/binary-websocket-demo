@@ -37,6 +37,11 @@
         Subscribed to new price proposals at
         <span data-bind="text: subscribeTimeElapsed"></span>ms
       </p>
+      <p>
+        Call SubID: <span data-bind="text: callSubId"></span>
+        <br/>
+        Put SubID: <span data-bind="text: putSubId"></span>
+      </p>
     </div>
     <div data-bind="with: $root.chosenTabError">
       <p class="error"><span data-bind="text: $data"></span></p>

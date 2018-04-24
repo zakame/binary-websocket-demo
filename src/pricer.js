@@ -28,6 +28,8 @@ require([
     self.spotTime = ko.observable();
 
     self.isLoading = ko.observable(false);
+    self.callSubId = ko.observable();
+    self.putSubId = ko.observable();
 
     self.unsubscribeTimeElapsed = ko.observable();
     self.subscribeTimeElapsed = ko.observable();
@@ -85,10 +87,14 @@ require([
     };
 
     api.events.on('proposal', function (data) {
-      if (data.echo_req.contract_type === 'CALL')
+      if (data.echo_req.contract_type === 'CALL') {
         self.callPayout(data.proposal.payout);
-      if (data.echo_req.contract_type === 'PUT')
+        self.callSubId(data.proposal.id);
+      }
+      if (data.echo_req.contract_type === 'PUT') {
         self.putPayout(data.proposal.payout);
+        self.putSubId(data.proposal.id);
+      }
 
       self.spotTime(data.proposal.spot_time);
 
